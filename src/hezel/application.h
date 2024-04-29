@@ -9,4 +9,6 @@ namespace hezel
         
         void run();
     };
+    
+    Application* createApplication();
 } // namespace name

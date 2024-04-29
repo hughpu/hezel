@@ -1,4 +1,5 @@
 #include "application.h"
+#include "entrypoint.h"
 
 class Sandbox : public hezel::Application
 {
@@ -14,9 +15,7 @@ public:
     }
 };
 
-int main()
+hezel::Application* hezel::createApplication()
 {
-    Sandbox* sandbox = new Sandbox();
-    sandbox->run();
-    delete sandbox;
+    return new Sandbox();
 }
