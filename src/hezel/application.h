@@ -7,7 +7,7 @@ namespace hezel
         Application();
         virtual ~Application();
         
-        void run();
+        virtual void run();
     };
     
     Application* createApplication();
