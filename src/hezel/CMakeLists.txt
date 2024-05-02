@@ -10,6 +10,11 @@ target_sources(hezel
         ${CUR_DIR_H}
 )
 
+if(NOT TARGET spdlog)
+    find_package(spdlog REQUIRED)
+endif()
+
 target_include_directories(hezel
     PUBLIC ${CMAKE_CURRENT_LIST_DIR}
 )
+target_link_libraries(hezel PUBLIC spdlog::spdlog)
