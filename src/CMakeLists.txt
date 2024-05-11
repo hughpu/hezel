@@ -1,1 +1,1 @@
-add_subdirectory("hezel")
+add_subdirectory(hezel)

@@ -7,27 +7,26 @@
 
 namespace hezel
 {
-    class Log
-    {
-    public:
-        Log();
-        ~Log();
-        
-        static void init();
-        static std::shared_ptr<spdlog::logger>& get_core_logger()
-        {
-            return core_logger_;
-        }
-        static std::shared_ptr<spdlog::logger>& get_client_logger()
-        {
-            return client_logger_;
-        }
+class Log
+{
+public:
+    Log();
+    ~Log();
     
-    private:
-        static std::shared_ptr<spdlog::logger> core_logger_;
-        static std::shared_ptr<spdlog::logger> client_logger_;
-    };
+    static void Init();
+    static std::shared_ptr<spdlog::logger>& get_core_logger()
+    {
+        return core_logger_;
+    }
+    static std::shared_ptr<spdlog::logger>& get_client_logger()
+    {
+        return client_logger_;
+    }
 
+private:
+    static std::shared_ptr<spdlog::logger> core_logger_;
+    static std::shared_ptr<spdlog::logger> client_logger_;
+};
 }
 
 // core log macro

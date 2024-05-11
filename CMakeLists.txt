@@ -18,6 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(BUILD_SHARED_LIBS ON)
 
+include_directories(src)
 add_subdirectory(src)
 
 enable_testing()
