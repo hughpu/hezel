@@ -2,6 +2,8 @@
 
 #include "event.h"
 #include <sstream>
+#include <spdlog/fmt/ostr.h>
+
 namespace hezel
 {
 class WindowResizeEvent : public Event
@@ -16,7 +18,7 @@ public:
     const std::string ToString() const override
     {
         std::stringstream ss;
-        ss << "WindoeResizeEvent: " << m_width << ", " << "m_height";
+        ss << "WindoeResizeEvent: " << m_width << ", " << m_height;
         return ss.str();
     }
     
@@ -26,6 +28,7 @@ public:
 private:
     unsigned int m_width, m_height;
 };
+
 
 class WindowCloseEvent : public Event
 {

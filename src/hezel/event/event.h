@@ -1,6 +1,10 @@
+#pragma once
+
 #include "hezel/core.h"
 #include <string>
 #include <functional>
+#include <spdlog/fmt/ostr.h>
+#include <type_traits>
 
 namespace hezel
 {
@@ -23,7 +27,7 @@ enum EventCategory: int
     kEventCategoryMouseButton = BIT(4),
 };
 
-#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::##type; }\
+#define EVENT_CLASS_TYPE(type) static EventType GetStaticType() { return EventType::type; }\
                                virtual EventType GetEventType() const override { return GetStaticType(); }\
                                virtual const std::string GetName() const override { return #type; }
 
@@ -42,6 +46,11 @@ public:
     bool IsInCategory(EventCategory category)
     {
         return GetCategoryFlags() & category;
+    }
+
+    friend std::ostream& operator<<(std::ostream& os, const Event& e)
+    {
+        return os << e.ToString();
     }
 
 protected:
@@ -73,8 +82,12 @@ private:
     Event& m_event;
 };
 
-inline std::ostream& operator<<(std::ostream& os, const Event& e)
-{
-    return os << e.ToString();
 }
-}
+
+template <typename T>
+struct fmt::formatter<
+    T,
+    std::enable_if_t<
+        std::is_base_of_v<hezel::Event, T>,
+        char
+    >> : ostream_formatter {};
