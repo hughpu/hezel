@@ -13,7 +13,7 @@ enum class EventType
     kMouseButtonPressed, kMouseButtonReleased, kMouseMoved, kMouseScrolled,
 };
 
-enum class EventCategory: int
+enum EventCategory: int
 {
     None = 0,
     kEventCategoryApplication = BIT(0),
@@ -41,7 +41,7 @@ public:
     
     bool IsInCategory(EventCategory category)
     {
-        return GetCategoryFlags() & static_cast<int>(category);
+        return GetCategoryFlags() & category;
     }
 
 protected:

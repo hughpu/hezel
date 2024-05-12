@@ -11,9 +11,3 @@ target_sources(event
 )
 
 target_include_directories(event PUBLIC ${CMAKE_CURRENT_LIST_DIR})
-
-set_target_properties(event PROPERTIES
-    CXX_STANDARD 17  # For C++11
-    # Or for C:
-    # C_STANDARD 99
-)
