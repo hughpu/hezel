@@ -20,3 +20,11 @@ target_include_directories(hezel
     PUBLIC ${CMAKE_CURRENT_LIST_DIR}
 )
 target_link_libraries(hezel PUBLIC spdlog::spdlog)
+target_precompile_headers(hezel
+    PUBLIC 
+        <memory>
+        <string>
+        <functional>
+        <type_traits>
+        <sstream>
+)

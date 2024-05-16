@@ -1,10 +1,7 @@
 #pragma once
 
 #include "hezel/core.h"
-#include <string>
-#include <functional>
 #include <spdlog/fmt/ostr.h>
-#include <type_traits>
 
 namespace hezel
 {

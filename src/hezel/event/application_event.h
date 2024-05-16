@@ -1,7 +1,6 @@
 #pragma once
 
 #include "event.h"
-#include <sstream>
 #include <spdlog/fmt/ostr.h>
 
 namespace hezel

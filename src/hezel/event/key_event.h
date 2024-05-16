@@ -2,8 +2,6 @@
 
 #include "event.h"
 
-#include <sstream>
-
 namespace hezel
 {
 class KeyEvent : public Event
