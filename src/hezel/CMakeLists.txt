@@ -16,10 +16,14 @@ if(NOT TARGET spdlog)
     find_package(spdlog REQUIRED)
 endif()
 
+if(NOT TARGET glfw3)
+    find_package(glfw3 REQUIRED)
+endif()
+
 target_include_directories(hezel
     PUBLIC ${CMAKE_CURRENT_LIST_DIR}
 )
-target_link_libraries(hezel PUBLIC spdlog::spdlog)
+target_link_libraries(hezel PUBLIC spdlog::spdlog glfw3)
 target_precompile_headers(hezel
     PUBLIC 
         <memory>
