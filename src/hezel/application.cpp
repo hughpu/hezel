@@ -1,6 +1,5 @@
 #include "application.h"
 #include "event/application_event.h"
-#include "log.h"
 
 namespace hezel
 {

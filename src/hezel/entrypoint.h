@@ -1,6 +1,5 @@
 #pragma once
 #include "application.h"
-#include "log.h"
 
 extern hezel::Application* hezel::createApplication();
 
