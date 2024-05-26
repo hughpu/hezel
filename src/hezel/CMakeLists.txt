@@ -26,9 +26,7 @@ target_sources(hezel
 
 find_package(spdlog REQUIRED)
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(${GLFW_INCLUDE_DIRS})
+find_package(glfw3 3.3 REQUIRED)
 
 find_package(OpenGL REQUIRED)
 
@@ -40,8 +38,8 @@ target_include_directories(hezel
 target_link_libraries(hezel
     PUBLIC
         spdlog::spdlog
-        ${GLFW_LIBRARIES}
-        OpenGL::OpenGL
+        glfw
+        OpenGL::GL
 )
 target_precompile_headers(hezel
     PUBLIC 
