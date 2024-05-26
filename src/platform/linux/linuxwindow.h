@@ -31,7 +31,7 @@ private:
     {
         std::string title;
         unsigned int width, height;
-        bool VSync;
+        bool v_sync;
         EventCallbackFn EventCallback;
     };
     

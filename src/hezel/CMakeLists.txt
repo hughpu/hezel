@@ -11,31 +11,38 @@ endif()
 file(GLOB CUR_DIR_CPP "${CMAKE_CURRENT_LIST_DIR}/*.cpp")
 file(GLOB CUR_DIR_H "${CMAKE_CURRENT_LIST_DIR}/*.h")
 file(GLOB EVENT_H "${CMAKE_CURRENT_LIST_DIR}/event/*.h")
+file(GLOB PLATFORM_WINDOW_H "${CMAKE_CURRENT_LIST_DIR}/../platform/linux/*.h")
+file(GLOB PLATFORM_WINDOW_CPP "${CMAKE_CURRENT_LIST_DIR}/../platform/linux/*.cpp")
 
 target_sources(hezel 
     PRIVATE
         ${CUR_DIR_CPP}
+        ${PLATFORM_WINDOW_CPP}
     PUBLIC
         ${CUR_DIR_H}
         ${EVENT_H}
+        ${PLATFORM_WINDOW_H}
 )
 
-if(NOT TARGET spdlog)
-    find_package(spdlog REQUIRED)
-endif()
+find_package(spdlog REQUIRED)
 
-if(NOT TARGET glfw3)
-    find_package(glfw3 REQUIRED)
-endif()
+find_package(PkgConfig REQUIRED)
+pkg_search_module(GLFW REQUIRED glfw3)
+include_directories(${GLFW_INCLUDE_DIRS})
 
-if(NOT TARGET OpenGL)
-    find_package(OpenGL REQUIRED)
-endif()
+find_package(OpenGL REQUIRED)
 
 target_include_directories(hezel
-    PUBLIC ${CMAKE_CURRENT_LIST_DIR}
+    PUBLIC
+        ${CMAKE_CURRENT_LIST_DIR}
+        "${CMAKE_CURRENT_LIST_DIR}/../platform/linux"
 )
-target_link_libraries(hezel PUBLIC spdlog::spdlog glfw3 OpenGL::OpenGL)
+target_link_libraries(hezel
+    PUBLIC
+        spdlog::spdlog
+        ${GLFW_LIBRARIES}
+        OpenGL::OpenGL
+)
 target_precompile_headers(hezel
     PUBLIC 
         "hzpch.h"

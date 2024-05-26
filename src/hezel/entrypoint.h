@@ -10,6 +10,6 @@ int main(int args, char** argsv)
     HZ_CLIENT_INFO("Hello! var={0}", 5);
 
     hezel::Application* app = hezel::createApplication();
-    app->run();
+    app->Run();
     delete app;
 }
