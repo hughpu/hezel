@@ -23,7 +23,22 @@ void Application::OnEvent(Event &event)
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<WindowCloseEvent>(BIND_EVENT_FN(OnWindowClose));
     
-    HZ_CORE_TRACE("{0}", event);
+    for (auto it = m_layer_stack.end(); it != m_layer_stack.begin();)
+    {
+        (*--it)->OnEvent(event);
+        if (event.Handled)
+            break;
+    }
+}
+
+void Application::PushLayer(Layer *layer)
+{
+    m_layer_stack.PushLayer(layer);
+}
+
+void Application::PushOverLayer(Layer *overlay)
+{
+    m_layer_stack.PushOverLayer(overlay);
 }
 
 void Application::Run()
@@ -32,6 +47,10 @@ void Application::Run()
     {
         glClearColor(1, 0, 1, 1);
         glClear(GL_COLOR_BUFFER_BIT);
+        
+        for (Layer* layer: m_layer_stack)
+            layer->OnUpdate();
+
         m_window->OnUpdate();
     }
 }

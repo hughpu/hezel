@@ -35,6 +35,7 @@ class Event
     friend class EventDispatcher;
 
 public:
+    bool Handled = false;
     virtual EventType GetEventType() const = 0;
     virtual const std::string GetName() const = 0;
     virtual int GetCategoryFlags() const = 0;
@@ -49,9 +50,6 @@ public:
     {
         return os << e.ToString();
     }
-
-protected:
-    bool m_handled = false;
 };
 
 class EventDispatcher
@@ -69,7 +67,7 @@ public:
     {
         if (m_event.GetEventType() == T::GetStaticType())
         {
-            m_event.m_handled = func(*dynamic_cast<T*>(&m_event));
+            m_event.Handled = func(*dynamic_cast<T*>(&m_event));
             return true;
         }
         return false;

@@ -1,6 +1,18 @@
 add_library(hezel SHARED)
 
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MD")
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Dist")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MD")
+endif()
+
 if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /MDd")
     add_compile_definitions("HZ_ENABLE_ASSERTS")
 endif()
 
