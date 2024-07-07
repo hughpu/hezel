@@ -45,15 +45,20 @@ find_package(OpenGL REQUIRED)
 target_include_directories(hezel
     PUBLIC
         ${CMAKE_CURRENT_LIST_DIR}
-        "${CMAKE_CURRENT_LIST_DIR}/../platform/linux"
+        ${CMAKE_CURRENT_LIST_DIR}/../platform/linux
+        ${CMAKE_CURRENT_LIST_DIR}/../glad/include
 )
 target_link_libraries(hezel
+    PRIVATE
+        ${CMAKE_DL_LIBS}
     PUBLIC
         spdlog::spdlog
         glfw
         OpenGL::GL
+        glad
 )
 target_precompile_headers(hezel
     PUBLIC 
         "hzpch.h"
 )
+add_compile_definitions(GLFW_INCLUDE_NONE)

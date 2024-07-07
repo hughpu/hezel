@@ -49,6 +49,8 @@ void LinuxWindow::Init(const WindowProps& props)
     HZ_CORE_ASSERT(m_window == nullptr, "failed to create window");
 
     glfwMakeContextCurrent(m_window);
+    int status = gladLoadGLLoader((GLADloadproc) glfwGetProcAddress);
+    HZ_ASSERT(status, "glad failed to initialize");
     glfwSetWindowUserPointer(m_window, &m_data);
     SetVSync(true);
     

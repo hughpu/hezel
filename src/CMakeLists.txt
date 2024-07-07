@@ -1,2 +1,2 @@
 add_subdirectory(hezel)
-add_subdirectory(platform/linux)
+add_subdirectory(glad)

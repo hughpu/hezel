@@ -1,6 +1,7 @@
 #include "application.h"
 #include "event/application_event.h"
 
+#include <glad/glad.h>
 #include <GLFW/glfw3.h>
 
 namespace hezel
