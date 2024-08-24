@@ -1,7 +1,7 @@
 #pragma once
 
-#include "hezel/core.h"
-#include "hezel/event/event.h"
+#include "core.h"
+#include "event/event.h"
 
 namespace hezel
 {

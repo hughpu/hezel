@@ -1,2 +1,57 @@
-add_subdirectory(hezel)
-add_subdirectory(glad)
+add_library(hezel SHARED)
+
+if(CMAKE_BUILD_TYPE STREQUAL "Release")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MD")
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Dist")
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} /MD")
+    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} /MD")
+endif()
+
+if(CMAKE_BUILD_TYPE STREQUAL "Debug")
+    set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS_DEBUG} /MDd")
+    set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS_DEBUG} /MDd")
+    add_compile_definitions("HZ_ENABLE_ASSERTS")
+endif()
+
+if(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    add_compile_definitions("HZ_PLATFORM_LINUX")
+    aux_source_directory("platform/linux" PLATFORM_SOURCE)
+    set(PLATFORM_INCLUDE "platform/linux")
+endif()
+
+aux_source_directory(hezel HEZEL_SOURCE)
+aux_source_directory(hezel/event EVENT_SOURCE)
+
+message("got system name: ${CMAKE_SYSTEM_NAME}")
+target_sources(hezel 
+    PRIVATE
+    ${HEZEL_SOURCE}
+    ${EVENT_SOURCE}
+    ${PLATFORM_SOURCE}
+)
+
+find_package(spdlog REQUIRED)
+find_package(glfw3 REQUIRED)
+find_package(OpenGL REQUIRED)
+
+target_include_directories(hezel
+    PUBLIC
+        .
+)
+target_link_libraries(hezel
+    PRIVATE
+        ${CMAKE_DL_LIBS}
+    PUBLIC
+        spdlog::spdlog
+        glfw
+        OpenGL::GL
+        glad
+)
+target_precompile_headers(hezel
+    PUBLIC 
+        "hezel/hzpch.h"
+)
+add_compile_definitions(GLFW_INCLUDE_NONE)
