@@ -24,6 +24,7 @@ endif()
 
 aux_source_directory(hezel HEZEL_SOURCE)
 aux_source_directory(hezel/event EVENT_SOURCE)
+aux_source_directory(hezel/imgui IMGUI_LAYER_SOURCE)
 
 message("got system name: ${CMAKE_SYSTEM_NAME}")
 target_sources(hezel 
@@ -31,6 +32,7 @@ target_sources(hezel
     ${HEZEL_SOURCE}
     ${EVENT_SOURCE}
     ${PLATFORM_SOURCE}
+    ${IMGUI_LAYER_SOURCE}
 )
 
 find_package(spdlog REQUIRED)
@@ -49,6 +51,7 @@ target_link_libraries(hezel
         glfw
         OpenGL::GL
         glad
+        imgui
 )
 target_precompile_headers(hezel
     PUBLIC 

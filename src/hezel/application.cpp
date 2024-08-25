@@ -9,8 +9,11 @@ namespace hezel
 
 #define BIND_EVENT_FN(x) std::bind(&Application::x, this, std::placeholders::_1)
 
+Application* Application::s_instance = nullptr;
+
 Application::Application()
 {
+    HZ_CORE_ASSERT(!s_instance, "Application already exists");
     m_window = std::unique_ptr<Window>(Window::Create());
     m_window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 }
@@ -35,11 +38,13 @@ void Application::OnEvent(Event &event)
 void Application::PushLayer(Layer *layer)
 {
     m_layer_stack.PushLayer(layer);
+    layer->OnAttach();
 }
 
 void Application::PushOverLayer(Layer *overlay)
 {
     m_layer_stack.PushOverLayer(overlay);
+    overlay->OnAttach();
 }
 
 void Application::Run()

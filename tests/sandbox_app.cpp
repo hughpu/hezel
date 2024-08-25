@@ -28,6 +28,7 @@ public:
     Sandbox()
     {
         PushLayer(new ExampleLayer());
+        PushOverLayer(new hezel::ImGuiLayer());
     }
     
     ~Sandbox()

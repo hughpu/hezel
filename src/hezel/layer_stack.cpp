@@ -16,7 +16,7 @@ LayerStack::~LayerStack()
 
 void LayerStack::PushLayer(Layer* layer)
 {
-    m_layer_insert = ++m_layers.emplace(m_layer_insert, layer);
+    m_layer_insert = m_layers.emplace(m_layer_insert, layer);
 }
 
 void LayerStack::PushOverLayer(Layer* overlay)
@@ -27,13 +27,9 @@ void LayerStack::PushOverLayer(Layer* overlay)
 void LayerStack::PopLayer(Layer* layer)
 {
     auto it = std::find(m_layers.begin(), m_layers.end(), layer);
-    if (it == m_layer_insert)
-    {
-        m_layer_insert--;
-    }
-
     if (it !=  m_layers.end())
     {
+        m_layer_insert--;
         m_layers.erase(it);
     }
 }
