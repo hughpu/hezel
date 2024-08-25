@@ -19,6 +19,7 @@ public:
     inline void SetEventCallback(const EventCallbackFn& callback) override { m_data.EventCallback = callback; }
     void SetVSync(bool enabled) override;
     bool IsVSync() const override;
+    void EnableUI() override;
 
 private:
     virtual void Init(const WindowProps& props);

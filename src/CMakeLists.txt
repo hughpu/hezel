@@ -36,25 +36,30 @@ target_sources(hezel
 )
 
 find_package(spdlog REQUIRED)
-find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
+# find_package(glfw3 3.3 REQUIRED)
+
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(GLFW3 REQUIRED glfw3)
+
 
 target_include_directories(hezel
     PUBLIC
         .
+        ${GLFW3_INCLUDE_DIRS}
 )
 target_link_libraries(hezel
     PRIVATE
         ${CMAKE_DL_LIBS}
     PUBLIC
         spdlog::spdlog
-        glfw
         OpenGL::GL
         glad
+        ${GLFW3_LIBRARIES}
         imgui
 )
 target_precompile_headers(hezel
     PUBLIC 
         "hezel/hzpch.h"
 )
-add_compile_definitions(GLFW_INCLUDE_NONE)
+target_compile_definitions(hezel PUBLIC GLFW_INCLUDE_NONE ${GLFW3_CFLAGS_OTHER})

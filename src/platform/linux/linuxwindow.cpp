@@ -3,6 +3,7 @@
 #include "hezel/event/application_event.h"
 #include "hezel/event/key_event.h"
 #include "hezel/event/mouse_event.h"
+#include "imgui_impl_glfw.h"
 
 namespace hezel
 {
@@ -165,6 +166,12 @@ void LinuxWindow::SetVSync(bool enabled)
 bool LinuxWindow::IsVSync() const
 {
     return m_data.v_sync;
+}
+
+void LinuxWindow::EnableUI()
+{
+    
+    ImGui_ImplGlfw_InitForOpenGL(m_window, true);
 }
 
 }

@@ -19,6 +19,7 @@ ImGuiLayer::~ImGuiLayer()
 
 void ImGuiLayer::OnAttach()
 {
+    IMGUI_CHECKVERSION();
     ImGui::CreateContext();
     ImGui::StyleColorsDark();
     
@@ -47,8 +48,9 @@ void ImGuiLayer::OnAttach()
 	io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
 	io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 	io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
-    
-    ImGui_ImplOpenGL3_Init("#version 410");
+
+    Application::Get().GetWindow().EnableUI();
+    ImGui_ImplOpenGL3_Init("#version 460");
 }
 
 void ImGuiLayer::OnDetach()

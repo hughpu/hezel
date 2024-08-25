@@ -14,6 +14,7 @@ Application* Application::s_instance = nullptr;
 Application::Application()
 {
     HZ_CORE_ASSERT(!s_instance, "Application already exists");
+    s_instance = this;
     m_window = std::unique_ptr<Window>(Window::Create());
     m_window->SetEventCallback(BIND_EVENT_FN(OnEvent));
 }
