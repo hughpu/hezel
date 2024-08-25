@@ -168,10 +168,4 @@ bool LinuxWindow::IsVSync() const
     return m_data.v_sync;
 }
 
-void LinuxWindow::EnableUI()
-{
-    
-    ImGui_ImplGlfw_InitForOpenGL(m_window, true);
-}
-
 }

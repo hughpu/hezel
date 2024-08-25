@@ -48,8 +48,7 @@ void ImGuiLayer::OnAttach()
 	io.KeyMap[ImGuiKey_X] = GLFW_KEY_X;
 	io.KeyMap[ImGuiKey_Y] = GLFW_KEY_Y;
 	io.KeyMap[ImGuiKey_Z] = GLFW_KEY_Z;
-
-    Application::Get().GetWindow().EnableUI();
+    
     ImGui_ImplOpenGL3_Init("#version 460");
 }
 
