@@ -103,6 +103,13 @@ void LinuxWindow::Init(const WindowProps& props)
             break;
         }
     });
+    
+    glfwSetCharCallback(m_window, [](GLFWwindow* window, unsigned int keycode){
+        WindowData& data = *(WindowData*) glfwGetWindowUserPointer(window);
+        
+        KeyTypedEvent event(keycode);
+        data.EventCallback(event);
+    });
 
     
     glfwSetMouseButtonCallback(m_window, [](GLFWwindow* window, int button, int action, int mods){
@@ -118,7 +125,7 @@ void LinuxWindow::Init(const WindowProps& props)
         }
         case GLFW_RELEASE:
         {
-            MouseButtonPressedEvent event(button);
+            MouseButtonReleasedEvent event(button);
             data.EventCallback(event);
             break;
         }
