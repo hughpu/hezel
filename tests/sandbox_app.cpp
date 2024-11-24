@@ -18,7 +18,9 @@ public:
     
     void OnEvent(hezel::Event &event) override
     {
-        HZ_CLIENT_TRACE("{0}", event);
+        if (event.GetEventType() == hezel::EventType::kMouseMoved) {
+            HZ_CLIENT_TRACE("Mouse Pos: ({0}, {1})", hezel::HezelInput::GetMouseX(), hezel::HezelInput::GetMouseY());
+        }
     }
 };
 
